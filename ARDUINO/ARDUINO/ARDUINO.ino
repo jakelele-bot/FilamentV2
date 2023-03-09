@@ -1,3 +1,5 @@
+#include <Encoder.h>
+
 void setup() {
   Serial.begin(9600);
   pinMode(SW, INPUT_PULLUP);
