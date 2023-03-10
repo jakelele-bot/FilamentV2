@@ -1,5 +1,6 @@
-#include <Encoder.h>
-
+#include "libs/Encoder/Encoder.h"
+  //der er mange fejl boel men jeg (JAKOB) har fået lavet så at vi har biblotekerne inde i en mappe "libs"
+  //man kalder biblotekerne ved at gøre således "libs/Encoder/Encoder.h"
 void setup() {
   Serial.begin(9600);
   pinMode(SW, INPUT_PULLUP);
