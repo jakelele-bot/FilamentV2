@@ -441,10 +441,10 @@ lcd.print("   "); //erase the content by printing space over it
 lcd.setCursor(0,0);
 lcd.print("TEMP"); //text
   //----------------------
-  lcd.setCursor(1,1); //3rd line, 2nd block
+  lcd.setCursor(0,1); //3rd line, 2nd block
   lcd.print("   "); //erase the content by printing space over it
-lcd.setCursor(1,1);
-  lcd.print("RPM"); //text
+lcd.setCursor(0,1);
+  lcd.print(">RPM"); //text
   //----------------------
   lcd.setCursor(0,2); //4th line, 2nd block
   lcd.print("   "); //erase the content by printing space over it
