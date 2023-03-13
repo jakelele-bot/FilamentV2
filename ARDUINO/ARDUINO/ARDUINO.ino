@@ -1,6 +1,12 @@
 #include <LiquidCrystal_I2C.h> //SDA = B7[A4], SCL = B6[A5] STM32/[Arduino]
 LiquidCrystal_I2C lcd(0x27, 20, 4);
 
+//Variabler til temperature
+int Temp_1;
+int Temp_2;
+int Temp_3;
+int Temp_4;
+
 int menuCounter = 0; //counts the clicks of the rotary encoder between menu items (0-3 in this case)
 
 int menu1_Value = 0; //value within menu 1
