@@ -3,13 +3,14 @@
 LiquidCrystal_I2C lcd(0x27, 20, 4);
 
 //Variabler til temperature
-int temp_1 = 0;
-int temp_2 = 20;
-int temp_3;
-int temp_4;
+int temp_1 = 400;
+int temp_2 = 200;
+int temp_3 = 124;
+int temp_4 = 180;
 int motor_RPM = 500;
 int filament_Afstand = 10;
 int weight_Rulle = 1;
+int stateRefresh = 1;
 
 int menuCounter = 0; //counts the clicks of the rotary encoder between menu items (0-3 in this case)
 
@@ -95,8 +96,6 @@ void loop()
     refreshSelection = false; // reset the variable - wait for a new trigger
   }
     if (menu4_Value == 1){
-    delay(100);
-    lcd.clear();
     ProgramStart(); 
   }
 }
@@ -432,18 +431,29 @@ void updateSelection()
 }
 
 void ProgramStart()
-{  
-
+{
+if (stateRefresh == 1){
+  lcd.clear();
+  stateRefresh = 0;
+}
 lcd.setCursor(0,0); //1st line, 2nd block
-  lcd.print("TEMP"); //text
+lcd.print("   "); //erase the content by printing space over it
+lcd.setCursor(0,0);
+lcd.print("TEMP"); //text
   //----------------------
   lcd.setCursor(1,1); //3rd line, 2nd block
+  lcd.print("   "); //erase the content by printing space over it
+lcd.setCursor(1,1);
   lcd.print("RPM"); //text
   //----------------------
   lcd.setCursor(0,2); //4th line, 2nd block
+  lcd.print("   "); //erase the content by printing space over it
+lcd.setCursor(0,2);
   lcd.print("TYKK"); //text
 
   lcd.setCursor(0,3); //4th line, 2nd block
+  lcd.print("   "); //erase the content by printing space over it
+lcd.setCursor(0,3);
   lcd.print("VEGT"); //text
 
   ValueUpdater();
@@ -452,17 +462,26 @@ lcd.setCursor(0,0); //1st line, 2nd block
 void ValueUpdater()
 {  
 
-  lcd.setCursor(8,0); //1st line, 10th block
+  lcd.setCursor(5,0); //1st line, 10th block
   lcd.print("   "); //erase the content by printing space over it
-  lcd.setCursor(8,0); //1st line, 10th block
+  lcd.setCursor(5,0); //1st line, 10th block
   lcd.print(temp_1);
 
   //----------------------
-  lcd.setCursor(14,0); //1st line, 10th block
+  lcd.setCursor(9,0); //1st line, 10th block
   lcd.print("   "); //erase the content by printing space over it
-  lcd.setCursor(14,0); //1st line, 10th block
+  lcd.setCursor(9,0); //1st line, 10th block
   lcd.print(temp_2); 
-  //----------------------
+
+  lcd.setCursor(13,0); //1st line, 10th block
+  lcd.print("   "); //erase the content by printing space over it
+  lcd.setCursor(13,0); //1st line, 10th block
+  lcd.print(temp_3); 
+
+  lcd.setCursor(17,0); //1st line, 10th block
+  lcd.print("   "); //erase the content by printing space over it
+  lcd.setCursor(17,0); //1st line, 10th block
+  lcd.print(temp_4); 
 
   //----------------------
   lcd.setCursor(9,2); //1st line, 10th block
