@@ -1,4 +1,5 @@
-#include <LiquidCrystal_I2C.h> //SDA = B7[A4], SCL = B6[A5] STM32/[Arduino]
+#include <LiquidCrystal_I2C.h> // LiquidCrystal I2C Frank de Brabander
+
 LiquidCrystal_I2C lcd(0x27, 20, 4);
 
 //Variabler til temperature
