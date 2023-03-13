@@ -1,10 +1,63 @@
-#include "libs/Encoder/Encoder.h"
-  //der er mange fejl boel men jeg (JAKOB) har fået lavet så at vi har biblotekerne inde i en mappe "libs"
-  //man kalder biblotekerne ved at gøre således "libs/Encoder/Encoder.h"
-  //DET SKAL VÆRE EN KLASSE BOEL!! JEG TROR IKKE DU KAN BRUGE SÅ MEGET AF DET HER...... Pls lav noget nyt og smart:)
+#include <LiquidCrystal_I2C.h> //SDA = B7[A4], SCL = B6[A5] STM32/[Arduino]
+LiquidCrystal_I2C lcd(0x27, 20, 4);
+
+int menuCounter = 0; //counts the clicks of the rotary encoder between menu items (0-3 in this case)
+
+int menu1_Value = 0; //value within menu 1
+int menu2_Value = 0; //value within menu 2
+int menu3_Value = 0; //value within menu 3
+int menu4_Value = 0; //value within menu 4
+
+bool menu1_selected = false; //enable/disable to change the value of menu item
+bool menu2_selected = false;
+bool menu3_selected = false;
+bool menu4_selected = false;
+//Note: if a menu is selected ">" becomes "X".
+
+//Defining pins
+//Arduino interrupt pins: 2, 3.
+const int RotaryCLK = PB3; //CLK pin on the rotary encoder
+const int RotaryDT = PB4; //DT pin on the rotary encoder
+const int PushButton = PB5; //Button to enter/exit menu
+
+//Statuses for the rotary encoder
+int CLKNow;
+int CLKPrevious;
+
+int DTNow;
+int DTPrevious;
+
+bool refreshLCD = true; //refreshes values
+bool refreshSelection = false; //refreshes selection (> / X)
+
+
 void setup() {
-  Serial.begin(9600);
-  pinMode(SW, INPUT_PULLUP);
+  pinMode(PB3, INPUT_PULLUP); //RotaryCLK
+  pinMode(PB4, INPUT_PULLUP); //RotaryDT
+  pinMode(PB5, INPUT_PULLUP); //Button
+
+  //------------------------------------------------------
+  lcd.init();                      // initialize the lcd   
+  lcd.backlight();
+  //------------------------------------------------------
+  lcd.setCursor(0,0); //Defining positon to write from first row, first column .
+  lcd.print("Menu demo");
+  lcd.setCursor(0,1); //Second row, first column
+  lcd.print("Rotary encoder"); 
+  lcd.setCursor(0,2); //Second row, first column
+  lcd.print("Improved version"); 
+  delay(5000); //wait 2 sec
+  
+  lcd.clear(); //clear the whole LCD
+  
+  printLCD(); //print the stationary parts on the screen
+  //------------------------------------------------------
+  //Store states of the rotary encoder
+  CLKPrevious = digitalRead(RotaryCLK);
+  DTPrevious = digitalRead(RotaryDT);
+      
+  attachInterrupt(digitalPinToInterrupt(RotaryCLK), rotate, CHANGE); //CLK pin is an interrupt pin
+  attachInterrupt(digitalPinToInterrupt(PushButton), pushButton, FALLING); //PushButton pin is an interrupt pin
 }
 
 void loop() 
