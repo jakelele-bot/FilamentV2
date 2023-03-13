@@ -22,9 +22,9 @@ bool menu4_selected = false;
 
 //Defining pins
 //Arduino interrupt pins: 2, 3.
-const int RotaryCLK = PB3; //CLK pin on the rotary encoder
+const int RotaryCLK = PB2; //CLK pin on the rotary encoder
 const int RotaryDT = PB4; //DT pin on the rotary encoder
-const int PushButton = PB5; //Button to enter/exit menu
+const int PushButton = PB3; //Button to enter/exit menu
 
 //Statuses for the rotary encoder
 int CLKNow;
@@ -38,20 +38,20 @@ bool refreshSelection = false; //refreshes selection (> / X)
 
 
 void setup() {
-  pinMode(PB3, INPUT_PULLUP); //RotaryCLK
+  pinMode(PB2, INPUT_PULLUP); //RotaryCLK
   pinMode(PB4, INPUT_PULLUP); //RotaryDT
-  pinMode(PB5, INPUT_PULLUP); //Button
+  pinMode(PB3, INPUT_PULLUP); //Button
 
   //------------------------------------------------------
   lcd.init();                      // initialize the lcd   
   lcd.backlight();
   //------------------------------------------------------
   lcd.setCursor(0,0); //Defining positon to write from first row, first column .
-  lcd.print("Menu demo");
+  lcd.print("Menu for");
   lcd.setCursor(0,1); //Second row, first column
-  lcd.print("Rotary encoder"); 
+  lcd.print("Filament Extruder"); 
   lcd.setCursor(0,2); //Second row, first column
-  lcd.print("Improved version"); 
+  lcd.print("Version: v1.1"); 
   delay(5000); //wait 2 sec
   
   lcd.clear(); //clear the whole LCD
@@ -429,6 +429,7 @@ void updateSelection()
 
 void ProgramStart()
 {  
+lcd.clear();
 lcd.setCursor(1,0); //1st line, 2nd block
   lcd.print("TEMP 1"); //text
   //----------------------
@@ -439,7 +440,7 @@ lcd.setCursor(1,0); //1st line, 2nd block
   lcd.print("MOTOR RPM"); //text
   //----------------------
   lcd.setCursor(1,3); //4th line, 2nd block
-  lcd.print("START"); //text
+  lcd.print("TYKK"); //text
 
 
 }
