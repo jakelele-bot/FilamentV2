@@ -3,10 +3,13 @@
 LiquidCrystal_I2C lcd(0x27, 20, 4);
 
 //Variabler til temperature
-int Temp_1;
-int Temp_2;
-int Temp_3;
-int Temp_4;
+int temp_1 = 0;
+int temp_2 = 20;
+int temp_3;
+int temp_4;
+int motor_RPM = 500;
+int filament_Afstand = 10;
+int weight_Rulle = 1;
 
 int menuCounter = 0; //counts the clicks of the rotary encoder between menu items (0-3 in this case)
 
@@ -430,18 +433,46 @@ void updateSelection()
 
 void ProgramStart()
 {  
-lcd.clear();
-lcd.setCursor(1,0); //1st line, 2nd block
-  lcd.print("TEMP 1"); //text
+
+lcd.setCursor(0,0); //1st line, 2nd block
+  lcd.print("TEMP"); //text
   //----------------------
-  lcd.setCursor(1,1); //2nd line, 2nd block
-  lcd.print("TEMP 2"); //text
+  lcd.setCursor(1,1); //3rd line, 2nd block
+  lcd.print("RPM"); //text
   //----------------------
-  lcd.setCursor(1,2); //3rd line, 2nd block
-  lcd.print("MOTOR RPM"); //text
-  //----------------------
-  lcd.setCursor(1,3); //4th line, 2nd block
+  lcd.setCursor(0,2); //4th line, 2nd block
   lcd.print("TYKK"); //text
 
+  lcd.setCursor(0,3); //4th line, 2nd block
+  lcd.print("VEGT"); //text
 
+  ValueUpdater();
+}
+
+void ValueUpdater()
+{  
+
+  lcd.setCursor(8,0); //1st line, 10th block
+  lcd.print("   "); //erase the content by printing space over it
+  lcd.setCursor(8,0); //1st line, 10th block
+  lcd.print(temp_1);
+
+  //----------------------
+  lcd.setCursor(14,0); //1st line, 10th block
+  lcd.print("   "); //erase the content by printing space over it
+  lcd.setCursor(14,0); //1st line, 10th block
+  lcd.print(temp_2); 
+  //----------------------
+
+  //----------------------
+  lcd.setCursor(9,2); //1st line, 10th block
+  lcd.print("   "); //erase the content by printing space over it
+  lcd.setCursor(9,2); //1st line, 10th block
+  lcd.print(filament_Afstand); //text
+
+  //----------------------
+  lcd.setCursor(9,3); //1st line, 10th block
+  lcd.print("   "); //erase the content by printing space over it
+  lcd.setCursor(9,3); //1st line, 10th block
+  lcd.print(weight_Rulle); //text
 }
