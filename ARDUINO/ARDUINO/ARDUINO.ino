@@ -1,6 +1,14 @@
 #include <LiquidCrystal_I2C.h> // LiquidCrystal I2C Frank de Brabander
+#include <HX711.h> // HX711 Arduino Library af Bogdan Necula
+#include <Arduino.h>
 
 LiquidCrystal_I2C lcd(0x27, 20, 4);
+
+// HX711 circuit wiring
+const int LOADCELL_DOUT_PIN = 8;
+const int LOADCELL_SCK_PIN = 9;
+HX711 scale;
+
 
 //Variabler til temperature
 int temp_1 = 400;
@@ -9,7 +17,7 @@ int temp_3 = 124;
 int temp_4 = 180;
 int motor_RPM = 500;
 int filament_Afstand = 10;
-int weight_Rulle = 1;
+int average_Weight_Rulle = 0;
 int stateRefresh = 1;
 
 int menuCounter = 0; //counts the clicks of the rotary encoder between menu items (0-3 in this case)
@@ -43,6 +51,10 @@ bool refreshSelection = false; //refreshes selection (> / X)
 
 
 void setup() {
+  scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
+  scale.set_scale(567.916);  // this value is obtained by calibrating the scale with known weights; see the README for details
+  scale.tare();               // reset the scale to 0
+
   pinMode(PB2, INPUT_PULLUP); //RotaryCLK
   pinMode(PB4, INPUT_PULLUP); //RotaryDT
   pinMode(PB3, INPUT_PULLUP); //Button
@@ -461,6 +473,8 @@ lcd.setCursor(0,3);
 
 void ValueUpdater()
 {  
+//Vægt updater:
+average_Weight_Rulle = scale.get_units(10);
 
   lcd.setCursor(5,0); //1st line, 10th block
   lcd.print("   "); //erase the content by printing space over it
@@ -491,7 +505,7 @@ void ValueUpdater()
 
   //----------------------
   lcd.setCursor(9,3); //1st line, 10th block
-  lcd.print("   "); //erase the content by printing space over it
+  lcd.print("      "); //erase the content by printing space over it
   lcd.setCursor(9,3); //1st line, 10th block
-  lcd.print(weight_Rulle); //text
+  lcd.print(average_Weight_Rulle); //text
 }
