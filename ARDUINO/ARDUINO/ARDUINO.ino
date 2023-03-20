@@ -3,15 +3,9 @@
 #include <Arduino.h>
 #include "LCD.h" //header fil til LCD display menuen
 
-<<<<<<< Updated upstream
 
-
-=======
 //Vi reservere pin fra 42 til 53 digital på arduino mega, til stepper drivers(TB6600)
 
-
-
->>>>>>> Stashed changes
 void setup() {
   scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
   scale.set_scale(567.916);  // this value is obtained by calibrating the scale with known weights; see the README for details
