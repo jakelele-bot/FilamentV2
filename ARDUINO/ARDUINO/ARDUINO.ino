@@ -1,7 +1,7 @@
 #include <LiquidCrystal_I2C.h> // LiquidCrystal I2C Frank de Brabander
 #include <HX711.h> // HX711 Arduino Library af Bogdan Necula
 #include <Arduino.h>
-#include <LCD.h> //header fil til LCD display menuen
+#include "LCD.h" //header fil til LCD display menuen
 
 
 
