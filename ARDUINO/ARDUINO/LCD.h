@@ -1,4 +1,3 @@
-
 LiquidCrystal_I2C lcd(0x27, 20, 4);
 
 // HX711 circuit wiring
@@ -375,3 +374,4 @@ void updateSelection()
   }
   }
 }
+
