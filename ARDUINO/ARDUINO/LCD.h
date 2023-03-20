@@ -1,3 +1,51 @@
+
+LiquidCrystal_I2C lcd(0x27, 20, 4);
+
+// HX711 circuit wiring
+const int LOADCELL_DOUT_PIN = 8;
+const int LOADCELL_SCK_PIN = 9;
+HX711 scale;
+
+
+//Variabler til temperature
+int temp_1 = 400;
+int temp_2 = 200;
+int temp_3 = 124;
+int temp_4 = 180;
+int motor_RPM = 500;
+int filament_Afstand = 10;
+int average_Weight_Rulle = 0;
+int stateRefresh = 1;
+
+int menuCounter = 0; //counts the clicks of the rotary encoder between menu items (0-3 in this case)
+
+int menu1_Value = 0; //value within menu 1
+int menu2_Value = 0; //value within menu 2
+int menu3_Value = 0; //value within menu 3
+int menu4_Value = 0; //value within menu 4
+
+bool menu1_selected = false; //enable/disable to change the value of menu item
+bool menu2_selected = false;
+bool menu3_selected = false;
+bool menu4_selected = false;
+//Note: if a menu is selected ">" becomes "X".
+
+//Defining pins
+//Arduino interrupt pins: 2, 3.
+const int RotaryCLK = PB2; //CLK pin on the rotary encoder
+const int RotaryDT = PB4; //DT pin on the rotary encoder
+const int PushButton = PB3; //Button to enter/exit menu
+
+//Statuses for the rotary encoder
+int CLKNow;
+int CLKPrevious;
+
+int DTNow;
+int DTPrevious;
+
+bool refreshLCD = true; //refreshes values
+bool refreshSelection = false; //refreshes selection (> / X)
+
 void rotate()
 {  
   //-----MENU1--------------------------------------------------------------
