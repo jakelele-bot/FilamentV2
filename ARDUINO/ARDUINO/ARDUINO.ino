@@ -2,6 +2,7 @@
 #include <HX711.h> // HX711 Arduino Library af Bogdan Necula
 #include <Arduino.h>
 #include "LCD.h" //header fil til LCD display menuen
+#include "LCDStart.h" //header fil til LCD start menuen hvor man kan se værdierne
 
 <<<<<<< Updated upstream
 =======
