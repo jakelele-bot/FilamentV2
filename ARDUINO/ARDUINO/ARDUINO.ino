@@ -2,15 +2,9 @@
 #include <HX711.h> // HX711 Arduino Library af Bogdan Necula
 #include <Arduino.h>
 #include "LCD.h" //header fil til LCD display menuen
-#include "LCDStart.h" //header fil til LCD start menuen hvor man kan se værdierne
-
-<<<<<<< Updated upstream
-=======
+//#include "LCDStart.h" //header fil til LCD start menuen hvor man kan se værdierne
 
 
-
-
->>>>>>> Stashed changes
 void setup() {
   scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
   scale.set_scale(567.916);  // this value is obtained by calibrating the scale with known weights; see the README for details
