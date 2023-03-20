@@ -2,13 +2,9 @@
 #include <HX711.h> // HX711 Arduino Library af Bogdan Necula
 #include <Arduino.h>
 #include "LCD.h" //header fil til LCD display menuen
-<<<<<<< HEAD
-//#include "LCDStart.h" //header fil til LCD start menuen hvor man kan se værdierne
-=======
 
-<<<<<<< Updated upstream
-=======
->>>>>>> parent of e40be4f (Fugt i fundamentet)
+//#include "LCDStart.h" //header fil til LCD start menuen hvor man kan se værdierne
+
 
 
 void setup() {
