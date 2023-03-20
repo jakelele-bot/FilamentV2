@@ -1,4 +1,6 @@
 
+LiquidCrystal_I2C lcd(0x27, 20, 4);
+
 // HX711 circuit wiring
 const int LOADCELL_DOUT_PIN = 8;
 const int LOADCELL_SCK_PIN = 9;
