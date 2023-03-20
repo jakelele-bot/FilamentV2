@@ -463,7 +463,7 @@ lcd.setCursor(0,1);
 lcd.setCursor(0,2);
   lcd.print("TYKK"); //text
 
-  lcd.setCursor(0,3); //4th line, 2nd block
+  lcd.setCursor(0,3); //4th line, 2nd block 
   lcd.print("   "); //erase the content by printing space over it
 lcd.setCursor(0,3);
   lcd.print("VEGT"); //text
