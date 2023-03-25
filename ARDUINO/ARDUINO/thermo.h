@@ -19,6 +19,7 @@ class thermo {
       thermoSCK = SCK;
       thermocouple = new MAX6675(thermoSCK, thermoCS, thermoSO);
       //laver en ny thermocouple med det pins der er oplyst
+      //en pointer er en adresse i hukomelsen på en arduino som er gør at arduinoen altid kan finde adressen. I dette tilfælde er adressen en ny thermocouple/thermo
     }
     //Denne funktion returnerer temperaturen i Celsius der læses fra termoelementet ved hjælp af MAX6675-IC'en.
     double readCelsius() {
