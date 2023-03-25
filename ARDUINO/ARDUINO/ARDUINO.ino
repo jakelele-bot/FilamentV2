@@ -1,6 +1,5 @@
 #include <LiquidCrystal_I2C.h> // LiquidCrystal I2C Frank de Brabander
 #include <HX711.h> // HX711 Arduino Library af Bogdan Necula
-#include <Arduino.h>
 #include "LCD.h" //header fil til LCD display menuen
 
 
@@ -39,8 +38,7 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(PushButton), pushButton, FALLING); //PushButton pin is an interrupt pin
 }
 
-void loop() 
-{
+void loop() {
   if(refreshLCD == true) //If we are allowed to update the LCD ...
   {
     updateLCD(); // ... we update the LCD ...
@@ -69,39 +67,37 @@ void loop()
 }
 
 
-void ProgramStart()
-{
-if (stateRefresh == 1){
-  lcd.clear();
-  stateRefresh = 0;
-}
-lcd.setCursor(0,0); //1st line, 2nd block
-lcd.print("   "); //erase the content by printing space over it
-lcd.setCursor(0,0);
-lcd.print("TEMP"); //text
+void ProgramStart(){
+  if (stateRefresh == 1){
+    lcd.clear();
+    stateRefresh = 0;
+  }
+  lcd.setCursor(0,0); //1st line, 2nd block
+  lcd.print("   "); //erase the content by printing space over it
+  lcd.setCursor(0,0);
+  lcd.print("TEMP"); //text
   //----------------------
   lcd.setCursor(0,1); //3rd line, 2nd block
   lcd.print("   "); //erase the content by printing space over it
-lcd.setCursor(0,1);
+  lcd.setCursor(0,1);
   lcd.print(">RPM"); //text
   //----------------------
   lcd.setCursor(0,2); //4th line, 2nd block
   lcd.print("   "); //erase the content by printing space over it
-lcd.setCursor(0,2);
+  lcd.setCursor(0,2);
   lcd.print("TYKK"); //text
 
   lcd.setCursor(0,3); //4th line, 2nd block 
   lcd.print("   "); //erase the content by printing space over it
-lcd.setCursor(0,3);
+  lcd.setCursor(0,3);
   lcd.print("VEGT"); //text
 
   ValueUpdater();
 }
 
-void ValueUpdater()
-{  
-//Vægt updater:
-average_Weight_Rulle = scale.get_units(10);
+void ValueUpdater(){  
+  //Vægt updater:
+  average_Weight_Rulle = scale.get_units(10);
 
   lcd.setCursor(5,0); //1st line, 10th block
   lcd.print("   "); //erase the content by printing space over it
