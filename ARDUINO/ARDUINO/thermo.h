@@ -4,7 +4,8 @@
 #include <max6675.h> //af adafruit
 
 //inspiration https://www.instructables.com/Arduino-and-Thermocouple-K-MAX6675/
-// kort biblotek tutorial: https://docs.arduino.cc/learn/contributions/arduino-creating-library-guide
+//kort biblotek tutorial: https://docs.arduino.cc/learn/contributions/arduino-creating-library-guide
+//lidt mere om hvad en pointer er: https://www.digikey.com/en/maker/blogs/2020/the-basics-of-c-on-an-arduino-part-3-pointers-and-arrays#:~:text=You%20can%20also%20use%20a,variable%20that%20it%20points%20at.
 
 
 class thermo {
