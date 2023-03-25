@@ -1,11 +1,19 @@
 #include <LiquidCrystal_I2C.h> // LiquidCrystal I2C Frank de Brabander
 #include <HX711.h> // HX711 Arduino Library af Bogdan Necula
+//#include <max6675.h> //af adafruit bliver brugt i "thermo.h"
 #include "LCD.h" //header fil til LCD display menuen
+#include "thermo.h"
 
 
 //Vi reservere pin fra 42 til 53 digital på arduino mega, til stepper drivers(TB6600)
-
+thermo thermo1(1, 2, 3);
+//indsæt pins på arduinoen der tilhører thermo(int SO, int CS, int SCK) SO,CS og SCK på max6675/breakout board
+//for at bruge ovenstående klasse skal der mindst være 250ms pause mellem hver læsning. (millis(250)), ellers kan chippen(MAX6675) ikke virke så godt.
+//derudover skal der laves en tidsfunktion der læser hvert 250 sekund (har vi gjort før)
+//for at læse data skal man bruge strukturen nedenfor
+//Serial.println(thermo1.readCelsius());
 void setup() {
+  
   scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
   scale.set_scale(567.916);  // this value is obtained by calibrating the scale with known weights; see the README for details
   scale.tare();               // reset the scale to 0
