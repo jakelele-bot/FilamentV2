@@ -12,9 +12,11 @@ int temp_2 = 200;
 int temp_3 = 124;
 int temp_4 = 180;
 int motor_RPM = 500;
-int filament_Afstand = 10;
 int average_Weight_Rulle = 0;
 int stateRefresh = 1;
+int analogPin = A0; //pin til analog read til hall effekt sensor
+int analogReadHall;
+float filament_Afstand = 20.667*log(analogReadHall)-125.59;
 
 int menuCounter = 0; //counts the clicks of the rotary encoder between menu items (0-3 in this case)
 

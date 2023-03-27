@@ -78,6 +78,8 @@ void ProgramStart(){
 void ValueUpdater(){  
   //Vægt updater:
   average_Weight_Rulle = scale.get_units(10);
+  analogReadHall = analogRead(analogPin);
+  filament_Afstand = 20.667*log(analogReadHall)-125.59;
 
   lcd.setCursor(5,0); //1st line, 10th block
   lcd.print("   "); //erase the content by printing space over it
@@ -105,6 +107,7 @@ void ValueUpdater(){
   lcd.print("   "); //erase the content by printing space over it
   lcd.setCursor(9,2); //1st line, 10th block
   lcd.print(filament_Afstand); //text
+  Serial.println(filament_Afstand);
 
   //----------------------
   lcd.setCursor(9,3); //1st line, 10th block
