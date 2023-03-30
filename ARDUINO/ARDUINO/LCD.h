@@ -16,7 +16,9 @@ int average_Weight_Rulle = 0;
 int stateRefresh = 1;
 int analogPin = A0; //pin til analog read til hall effekt sensor
 int analogReadHall;
-float filament_Afstand = 20.667*log(analogReadHall)-125.59;
+//float filament_Afstand = 20.667*log(analogReadHall)-125.59;
+//float filament_Afstand = (0.0013*(analogReadHall*analogReadHall))-1.0646*analogReadHall+224.06;
+float filament_Afstand = (0.0016*(analogReadHall*analogReadHall))-1.4604*analogReadHall+324.89;
 
 int menuCounter = 0; //counts the clicks of the rotary encoder between menu items (0-3 in this case)
 

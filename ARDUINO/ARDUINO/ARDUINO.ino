@@ -19,6 +19,7 @@ void setup() {
 }
 
 void loop() {
+  Serial.println(analogReadHall);
   if(refreshLCD == true) //If we are allowed to update the LCD ...
   {
     updateLCD(); // ... we update the LCD ...
@@ -108,6 +109,8 @@ void ValueUpdater(){
   lcd.setCursor(9,2); //1st line, 10th block
   lcd.print(filament_Afstand); //text
   Serial.println(filament_Afstand);
+  
+  Serial.println(analogReadHall);
 
   //----------------------
   lcd.setCursor(9,3); //1st line, 10th block
