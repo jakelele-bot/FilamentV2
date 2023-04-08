@@ -1,6 +1,9 @@
+//------BIBLOTEKER------
 #include <LiquidCrystal_I2C.h> // LiquidCrystal I2C Frank de Brabander
 #include <HX711.h> // HX711 Arduino Library af Bogdan Necula
 #include <max6675.h> //af adafruit bliver brugt i "thermo.h"
+
+//------HEADER FILER------
 
 #include "LCD.h" //header fil til LCD display menuen
 #include "thermo.h" //header fil til temperatur måling
