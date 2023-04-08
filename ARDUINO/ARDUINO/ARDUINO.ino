@@ -1,24 +1,34 @@
 #include <LiquidCrystal_I2C.h> // LiquidCrystal I2C Frank de Brabander
 #include <HX711.h> // HX711 Arduino Library af Bogdan Necula
-//#include <max6675.h> //af adafruit bliver brugt i "thermo.h"
-//#include <PID_v1.h> //af Brett Beauregard bliver brugt i "regPID.h"
+#include <max6675.h> //af adafruit bliver brugt i "thermo.h"
+
 #include "LCD.h" //header fil til LCD display menuen
-#include "thermo.h"
-#include "setupOpstart.h"
+#include "thermo.h" //header fil til temperatur måling
+#include "regPID.h" //header fil til PID regulering.
+#include "setupOpstart.h" //header fil til start af LCD skærm
 
 
 //Vi reservere pin fra 42 til 53 digital på arduino mega, til stepper drivers(TB6600)
 thermo thermo1(1, 2, 3);
 //indsæt pins på arduinoen der tilhører thermo(int SO, int CS, int SCK) SO,CS og SCK på max6675/breakout board
-//for at bruge ovenstående klasse skal der mindst være 250ms pause mellem hver læsning. (millis(250)), ellers kan chippen(MAX6675) ikke virke så godt.
-//derudover skal der laves en tidsfunktion der læser hvert 250 sekund (har vi gjort før)
+
 //for at læse data skal man bruge strukturen nedenfor
 //Serial.println(thermo1.readCelsius());
+//sættes ind i void loop thermo1.updateCelsius();
+//aktuelle læsning af græder i celsius opdateret hver 300ms thermo1.getTemperature();
+
+//IKKE TESTET MED PAUSE ENDNU
+
+regPID pid1(200.6, 30.1, 4.0, 6); //(float _Kp, float _Ki, float _Kd, int _mosfet_pin)
+
 void setup() {
+  delay(5000); //initialize max6675 chip...
   setupStart();
 }
 
 void loop() {
+  thermo1.updateCelsius();
+  thermo1.getTemperature();
   Serial.println(analogReadHall);
   if(refreshLCD == true) //If we are allowed to update the LCD ...
   {

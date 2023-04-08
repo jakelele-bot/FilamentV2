@@ -1,7 +1,7 @@
 #ifndef THERMO_H
 #define THERMO_H
 
-#include <max6675.h> //af adafruit
+//#include <max6675.h> //af adafruit
 
 //inspiration https://www.instructables.com/Arduino-and-Thermocouple-K-MAX6675/
 //kort biblotek tutorial: https://docs.arduino.cc/learn/contributions/arduino-creating-library-guide
@@ -13,7 +13,9 @@ class thermo {
   public:
   //laver public variabler som kan tilgås af andre dele af programmet
     thermo(int SO, int CS, int SCK) {
-      //laver en klasse der gør at man kan bruge flere thermocoupler, ved at indsætte digitale pins
+      unsigned long previousMillis=0;
+      const long interval = 300;
+      //laver en funktion der gør at man kan bruge flere thermocoupler, ved at indsætte digitale pins
       thermoSO = SO;
       thermoCS = CS;
       thermoSCK = SCK;
@@ -21,17 +23,32 @@ class thermo {
       //laver en ny thermocouple med det pins der er oplyst
       //en pointer er en adresse i hukomelsen på en arduino som er gør at arduinoen altid kan finde adressen. I dette tilfælde er adressen en ny thermocouple/thermo
     }
+
     //Denne funktion returnerer temperaturen i Celsius der læses fra termoelementet ved hjælp af MAX6675-IC'en.
     double readCelsius() {
       //https://arduinogetstarted.com/reference/arduino-double
-      //double i arduiono er en float værdi "precision float"
+      //double i arduiono er en dobbelt så lang float værdi 4 bytes i stedet for 2 = mere præcise måling
       return thermocouple->readCelsius();
       //pilen "peger" fra instansen/klassen thermocuple til at retunere readCelsius. Dette er på grund af at det er en pointer som har allokeret hukomelse.
       //altså man peger fra en pointer til en værdi. Fra en klasse til en værdi
       //her står lidt: https://www.geeksforgeeks.org/arrow-operator-in-c-c-with-examples/ 
       //retunere værdien der bliver aflæset af thermocouple
     }
+    double getTemperature() {
+      double temperature = readCelsius();
+      return temperature;
+    }
+    void updateCelsius(){
+      unsigned long currentMillis = millis();
+      if (currentMillis - previousMillis >= interval) { // hvis der er gået 300ms eller mere
+        previousMillis = currentMillis; // opdaterer previousMillis med den aktuelle tid
+        double temperature = getTemperature(); // udfører målingen
+      }
+      
+    }
   private:
+    unsigned long previousMillis;
+    const long interval;
     int thermoSO;
     int thermoCS;
     int thermoSCK;
