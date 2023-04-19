@@ -25,22 +25,18 @@ int analogReadHall;
 //float filament_Afstand = (0.0013*(analogReadHall*analogReadHall))-1.0646*analogReadHall+224.06;
 float filament_Afstand = (0.0016*(analogReadHall*analogReadHall))-1.4604*analogReadHall+324.89;
 
-int PLA_TOP = 190;
-int PLA_BUND = 175;
-double temperature2;
-double temperature1;
-regPID pid1(115, 18, 0.5, 8);
-regPID pid2(80.5, 90, 6, 10);
-
-thermo thermo1(53, 51, 49);
-thermo thermo2(52, 50, 48);
+//Vi reservere pin fra 42 til 53 digital på arduino mega, til stepper drivers(TB6600)
+thermo thermo1(1, 2, 3);
 //indsæt pins på arduinoen der tilhører thermo(int SO, int CS, int SCK) SO,CS og SCK på max6675/breakout board
 
-const long interval = 300;
-unsigned long previousMillis = 0;
+//for at læse data skal man bruge strukturen nedenfor
+//Serial.println(thermo1.readCelsius());
+//sættes ind i void loop thermo1.updateCelsius();
+//aktuelle læsning af græder i celsius opdateret hver 300ms thermo1.getTemperature();
 
-//Vi reservere pin fra 42 til 53 digital på arduino mega, til stepper drivers(TB6600)
+//IKKE TESTET MED PAUSE ENDNU
 
+regPID pid1(200.6, 30.1, 4.0, 6); //(float _Kp, float _Ki, float _Kd, int _mosfet_pin)
 
 void setup() {
   delay(5000); //initialize max6675 chip...
