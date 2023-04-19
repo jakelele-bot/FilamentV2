@@ -57,14 +57,14 @@ void loop() {
           temperature2 = thermo2.readCelsius(); // udfører målingen
           temperature1 = thermo1.readCelsius(); // udfører målingen
           //Serial.println(temperature1);
-          Serial.println(temperature2);
+          //Serial.println(temperature2);
       }
   pid1.update(temperature1,PLA_TOP);
   pid2.update(temperature2,PLA_BUND);
 
   //Til PID
 
-  Serial.println(analogReadHall);
+  //Serial.println(analogReadHall);
   if(refreshLCD == true) //If we are allowed to update the LCD ...
   {
     updateLCD(); // ... we update the LCD ...
@@ -125,7 +125,7 @@ void ValueUpdater(){
   //Vægt updater:
   average_Weight_Rulle = scale.get_units(10);
   analogReadHall = analogRead(analogPin);
-  filament_Afstand = 20.667*log(analogReadHall)-125.59;
+  filament_Afstand = -0.0294*analogReadHall+19.882;
 
   lcd.setCursor(5,0); //1st line, 10th block
   lcd.print("   "); //erase the content by printing space over it
@@ -155,7 +155,7 @@ void ValueUpdater(){
   lcd.print(filament_Afstand); //text
   Serial.println(filament_Afstand);
   
-  Serial.println(analogReadHall);
+  Serial.print(analogReadHall);
 
   //----------------------
   lcd.setCursor(9,3); //1st line, 10th block
