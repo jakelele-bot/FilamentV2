@@ -6,20 +6,6 @@ const int LOADCELL_SCK_PIN = 9;
 HX711 scale;
 
 
-//Variabler til temperature
-int temp_1 = 400;
-int temp_2 = 200;
-int temp_3 = 124;
-int temp_4 = 180;
-int motor_RPM = 500;
-int average_Weight_Rulle = 0;
-int stateRefresh = 1;
-int analogPin = A0; //pin til analog read til hall effekt sensor
-int analogReadHall;
-//float filament_Afstand = 20.667*log(analogReadHall)-125.59;
-//float filament_Afstand = (0.0013*(analogReadHall*analogReadHall))-1.0646*analogReadHall+224.06;
-float filament_Afstand = (0.0016*(analogReadHall*analogReadHall))-1.4604*analogReadHall+324.89;
-
 int menuCounter = 0; //counts the clicks of the rotary encoder between menu items (0-3 in this case)
 
 int menu1_Value = 0; //value within menu 1

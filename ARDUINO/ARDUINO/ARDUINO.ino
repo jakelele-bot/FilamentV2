@@ -11,6 +11,20 @@
 #include "setupOpstart.h" //header fil til start af LCD skærm
 
 
+//Variabler til temperature
+int temp_1 = 400;
+int temp_2 = 200;
+int temp_3 = 124;
+int temp_4 = 180;
+int motor_RPM = 500;
+int average_Weight_Rulle = 0;
+int stateRefresh = 1;
+int analogPin = A0; //pin til analog read til hall effekt sensor
+int analogReadHall;
+//float filament_Afstand = 20.667*log(analogReadHall)-125.59;
+//float filament_Afstand = (0.0013*(analogReadHall*analogReadHall))-1.0646*analogReadHall+224.06;
+float filament_Afstand = (0.0016*(analogReadHall*analogReadHall))-1.4604*analogReadHall+324.89;
+
 //Vi reservere pin fra 42 til 53 digital på arduino mega, til stepper drivers(TB6600)
 thermo thermo1(1, 2, 3);
 //indsæt pins på arduinoen der tilhører thermo(int SO, int CS, int SCK) SO,CS og SCK på max6675/breakout board
