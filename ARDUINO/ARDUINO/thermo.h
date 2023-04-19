@@ -33,22 +33,8 @@ class thermo {
       //altså man peger fra en pointer til en værdi. Fra en klasse til en værdi
       //her står lidt: https://www.geeksforgeeks.org/arrow-operator-in-c-c-with-examples/ 
       //retunere værdien der bliver aflæset af thermocouple
-    }
-    double getTemperature() {
-      double temperature = readCelsius();
-      return temperature;
-    }
-    void updateCelsius(){
-      unsigned long currentMillis = millis();
-      if (currentMillis - previousMillis >= interval) { // hvis der er gået 300ms eller mere
-        previousMillis = currentMillis; // opdaterer previousMillis med den aktuelle tid
-        double temperature = getTemperature(); // udfører målingen
-      }
-      
-    }
+    } 
   private:
-    unsigned long previousMillis;
-    const long interval;
     int thermoSO;
     int thermoCS;
     int thermoSCK;
