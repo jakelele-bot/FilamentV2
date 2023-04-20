@@ -22,6 +22,12 @@ int stateRefresh = 1;
 int analogPin = A0; //pin til analog read til hall effekt sensor
 int analogReadHall;
 
+
+int menu1_Value = 0; //value for afstand til væg
+int menu2_Value = 0; //value for væg tykkelsen
+int menu3_Value = 0; //value for højde
+int menu4_Value = 0; //value for start af program
+
 int PLA_TOP = 190;
 int PLA_BUND = 175;
 double temperature2;
@@ -137,16 +143,6 @@ void ValueUpdater(){
   lcd.print("   "); //erase the content by printing space over it
   lcd.setCursor(9,0); //1st line, 10th block
   lcd.print(temp_2); 
-
-  lcd.setCursor(13,0); //1st line, 10th block
-  lcd.print("   "); //erase the content by printing space over it
-  lcd.setCursor(13,0); //1st line, 10th block
-  lcd.print(temp_3); 
-
-  lcd.setCursor(17,0); //1st line, 10th block
-  lcd.print("   "); //erase the content by printing space over it
-  lcd.setCursor(17,0); //1st line, 10th block
-  lcd.print(temp_4); 
 
   //----------------------
   lcd.setCursor(9,2); //1st line, 10th block

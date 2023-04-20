@@ -8,10 +8,11 @@ HX711 scale;
 
 int menuCounter = 0; //counts the clicks of the rotary encoder between menu items (0-3 in this case)
 
-int menu1_Value = 0; //value within menu 1
-int menu2_Value = 0; //value within menu 2
-int menu3_Value = 0; //value within menu 3
-int menu4_Value = 0; //value within menu 4
+
+extern int menu1_Value; //value within menu 1
+extern int menu2_Value; //value within menu 2
+extern int menu3_Value; //value within menu 3
+extern int menu4_Value; //value within menu 4
 
 bool menu1_selected = false; //enable/disable to change the value of menu item
 bool menu2_selected = false;
