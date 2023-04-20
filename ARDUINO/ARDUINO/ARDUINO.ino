@@ -11,22 +11,21 @@
 #include "setupOpstart.h" //header fil til start af LCD skærm
 
 
-//Variabler til temperature
-int temp_1 = 400;
-int temp_2 = 200;
-int temp_3 = 124;
-int temp_4 = 180;
+
 int motor_RPM = 500;
 int average_Weight_Rulle = 0;
 int stateRefresh = 1;
 int analogPin = A0; //pin til analog read til hall effekt sensor
 int analogReadHall;
 
-
+//Variabler til menu værdier
 int menu1_Value = 0; //value for afstand til væg
 int menu2_Value = 0; //value for væg tykkelsen
 int menu3_Value = 0; //value for højde
 int menu4_Value = 0; //value for start af program
+
+int PLAtemp = 165;
+int PLAbundTemp = 170;
 
 int PLA_TOP = 190;
 int PLA_BUND = 175;
@@ -35,8 +34,8 @@ double temperature1;
 regPID pid1(115, 18, 0.5, 8);
 regPID pid2(80.5, 90, 6, 10);
 
-thermo thermo1(53, 51, 49);
-thermo thermo2(52, 50, 48);
+thermo thermo1(41, 43, 45);
+thermo thermo2(23, 25, 27);
 //indsæt pins på arduinoen der tilhører thermo(int SO, int CS, int SCK) SO,CS og SCK på max6675/breakout board
 
 const long interval = 300;
@@ -93,7 +92,10 @@ void loop() {
     updateSelection(); //update the selection on the LCD
     refreshSelection = false; // reset the variable - wait for a new trigger
   }
-    if (menu4_Value == 1){
+    if (menu4_Value == 2){
+    ProgramStart(); 
+  }
+     if (menu4_Value == 4){
     ProgramStart(); 
   }
 
@@ -136,13 +138,13 @@ void ValueUpdater(){
   lcd.setCursor(5,0); //1st line, 10th block
   lcd.print("   "); //erase the content by printing space over it
   lcd.setCursor(5,0); //1st line, 10th block
-  lcd.print(temp_1);
+  lcd.print(temperature1);
 
   //----------------------
-  lcd.setCursor(9,0); //1st line, 10th block
+  lcd.setCursor(11,0); //1st line, 10th block
   lcd.print("   "); //erase the content by printing space over it
-  lcd.setCursor(9,0); //1st line, 10th block
-  lcd.print(temp_2); 
+  lcd.setCursor(11,0); //1st line, 10th block
+  lcd.print(temperature1); 
 
   //----------------------
   lcd.setCursor(9,2); //1st line, 10th block

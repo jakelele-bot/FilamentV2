@@ -154,7 +154,7 @@ void rotate()
     // the encoder is rotating in A direction, so we increase
     if (digitalRead(RotaryDT) != CLKNow) 
     {
-      if(menu4_Value < 1) //we do not go above 100
+      if(menu4_Value < 5) //we do not go above 100
       {
         menu4_Value++;  
       }
@@ -165,9 +165,9 @@ void rotate()
     } 
     else 
     {
-      if(menu4_Value < 1) //we do not go below 0
+      if(menu4_Value < 1 ) //we do not go below 0
       {
-          menu4_Value = 1;
+          menu4_Value = 5;
           
       }
       else
@@ -246,7 +246,7 @@ void pushButton()
 
 void printLCD()
 {
-  if (menu4_Value == 0){
+  if (menu4_Value == 0 || menu4_Value == 1 || menu4_Value == 3 || menu4_Value == 5){
       //These are the values which are not changing the operation
   lcd.setCursor(1,0); //1st line, 2nd block
   lcd.print("AFS VEG"); //text
@@ -273,7 +273,7 @@ void printLCD()
 
 void updateLCD()
 {  
-  if (menu4_Value == 0){
+  if (menu4_Value == 0 || menu4_Value == 1 || menu4_Value == 3 || menu4_Value == 5){
   lcd.setCursor(9,0); //1st line, 10th block
   lcd.print("   "); //erase the content by printing space over it
   lcd.setCursor(9,0); //1st line, 10th block
@@ -298,7 +298,7 @@ void updateLCD()
 
 void updateCursorPosition()
 {
-if (menu4_Value == 0){
+if (menu4_Value == 0 || menu4_Value == 1 || menu4_Value == 3 || menu4_Value == 5){
   //Clear display's ">" parts 
   lcd.setCursor(0,0); //1st line, 1st block
   lcd.print(" "); //erase by printing a space
@@ -337,7 +337,7 @@ if (menu4_Value == 0){
 
 void updateSelection()
 {
-  if (menu4_Value == 0){
+  if (menu4_Value == 0 || menu4_Value == 1 || menu4_Value == 3 || menu4_Value == 5){
   //When a menu is selected ">" becomes "X"
 
   if(menu1_selected == true)
