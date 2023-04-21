@@ -49,7 +49,7 @@ void rotate()
     // the encoder is rotating in A direction, so we increase
     if (digitalRead(RotaryDT) != CLKNow) 
     {
-      if(menu1_Value < 100) //we do not go above 100
+      if(menu1_Value < 200) //we do not go above 100
       {
         menu1_Value++;  
       }
@@ -62,7 +62,7 @@ void rotate()
     {
       if(menu1_Value < 1) //we do not go below 0
       {
-          menu1_Value = 100;
+          menu1_Value = 200;
       }
       else
       {
@@ -84,7 +84,7 @@ void rotate()
     // the encoder is rotating in A direction, so we increase
     if (digitalRead(RotaryDT) != CLKNow) 
     {
-      if(menu2_Value < 100) //we do not go above 100
+      if(menu2_Value < 200) //we do not go above 100
       {
         menu2_Value++;  
       }
@@ -97,7 +97,7 @@ void rotate()
     {
       if(menu2_Value < 1) //we do not go below 0
       {
-          menu2_Value = 100;
+          menu2_Value = 200;
       }
       else
       {
@@ -119,7 +119,7 @@ void rotate()
     // the encoder is rotating in A direction, so we increase
     if (digitalRead(RotaryDT) != CLKNow) 
     {
-      if(menu3_Value < 100) //we do not go above 100
+      if(menu3_Value < 200) //we do not go above 100
       {
         menu3_Value++;  
       }
@@ -132,7 +132,7 @@ void rotate()
     {
       if(menu3_Value < 1) //we do not go below 0
       {
-          menu3_Value = 100;
+          menu3_Value = 200;
       }
       else
       {

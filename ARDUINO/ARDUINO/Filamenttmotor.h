@@ -45,15 +45,11 @@ void MotorLoop()
   // Adjust motor speed based on filament_afstand value
   if (filament_Afstand1 >= 1.8) {
     stepperFilament.setMaxSpeed(hspeed);
-    Serial.println("test1");
-    Serial.println(filament_Afstand1);
     stepperFilament.move(200);
     stepperFilament.run();
   } 
   else if (filament_Afstand1 <= 1.7) {
     stepperFilament.setMaxSpeed(lspeed);
-    Serial.println("test2");
-    Serial.println(filament_Afstand1);
     stepperFilament.move(100);
     stepperFilament.run();
   } 

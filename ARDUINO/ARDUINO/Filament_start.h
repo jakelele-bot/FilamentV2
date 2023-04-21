@@ -1,8 +1,6 @@
 //Variabler til temperature
 int temp_1 = 400;
 int temp_2 = 200;
-int temp_3 = 124;
-int temp_4 = 180;
 int motor_RPM = 500;
 int average_Weight_Rulle = 0;
 int stateRefresh = 1;
