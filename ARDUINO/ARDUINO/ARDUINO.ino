@@ -2,7 +2,7 @@
 #include <LiquidCrystal_I2C.h> // LiquidCrystal I2C Frank de Brabander
 #include <HX711.h> // HX711 Arduino Library af Bogdan Necula
 #include <max6675.h> //af adafruit bliver brugt i "thermo.h"
-#include <<AccelStepper.h>
+#include <AccelStepper.h>
 //------HEADER FILER------
 
 #include "LCD.h" //header fil til LCD display menuen
@@ -49,8 +49,9 @@ float filament_Afstand;
 void setup() {
   Serial.begin(9600);
   Serial.println("START TEMP");
-  delay(5000); //initialize max6675 chip...
+  delay(2000); //initialize max6675 chip...
   setupStart();
+  SetupMotor();
 }
 
 void loop() {
@@ -91,19 +92,23 @@ void loop() {
     refreshSelection = false; // reset the variable - wait for a new trigger
   }
     if (menu4_Value == 2){
+      lcd.clear();
     ProgramStart(); 
   }
      if (menu4_Value == 4){
+    lcd.clear();
     ProgramStart(); 
   }
 
 }
 
 void ProgramStart(){
+  
   if (stateRefresh == 1){
     lcd.clear();
     stateRefresh = 0;
   }
+  /*
   lcd.setCursor(0,0); //1st line, 2nd block
   lcd.print("   "); //erase the content by printing space over it
   lcd.setCursor(0,0);
@@ -123,15 +128,18 @@ void ProgramStart(){
   lcd.print("   "); //erase the content by printing space over it
   lcd.setCursor(0,3);
   lcd.print("VEGT"); //text
-
+*/
   ValueUpdater();
 }
 
 void ValueUpdater(){  
   //Vægt updater:
-  average_Weight_Rulle = scale.get_units(10);
+  //average_Weight_Rulle = scale.get_units(10);
   analogReadHall = analogRead(analogPin);
   filament_Afstand = -0.0294*analogReadHall+19.882;
+    //Funktioner
+  MotorLoop();
+  /*
 
   lcd.setCursor(5,0); //1st line, 10th block
   lcd.print("   "); //erase the content by printing space over it
@@ -158,4 +166,6 @@ void ValueUpdater(){
   lcd.print("      "); //erase the content by printing space over it
   lcd.setCursor(9,3); //1st line, 10th block
   lcd.print(average_Weight_Rulle); //text
+*/
+
 }

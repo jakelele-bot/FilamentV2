@@ -32,3 +32,4 @@ void forward(int steps){
   }
   digitalWrite(ENAPIN,HIGH);//DISABLE STEPPER
 }
+

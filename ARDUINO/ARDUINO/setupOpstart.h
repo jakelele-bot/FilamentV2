@@ -17,7 +17,7 @@ void setupStart(){
   lcd.print("Filament Extruder"); 
   lcd.setCursor(0,2); //Second row, first column
   lcd.print("Version: v1.3"); 
-  delay(5000); //wait 2 sec
+  delay(2000); //wait 2 sec
   
   lcd.clear(); //clear the whole LCD
   

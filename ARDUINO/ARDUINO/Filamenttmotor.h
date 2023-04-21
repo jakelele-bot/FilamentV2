@@ -6,63 +6,63 @@
 
 // defines pins numbers
 
-const int stepPinFilament = 53;
-const int directionPinFilament = 51;
-const int enablePinFilament = 49;
+// defines pins numbers
 
+const int stepPinFilament = 22;
+const int directionPinFilament = 34;
+const int enablePinFilament = 24;
+const int analogPin1 = 0;
 
 
 //Vi laver lige å speed a variabler til tykkelsen af plastikfilamentet der kommer ud sådan vi kan bestemme speed til den ene motor ud fra dette.
 float tykkelse = 0;
-const float dspeed = 50;
-const float hspeed = 100;
-const float lspeed = 25;
-extern filament_Afstand;
-
+const float dspeed = 1000;
+const float hspeed = 2000;
+const float lspeed = 500;
+float filament_Afstand1;
 
 // Define a stepper and the pins it will use
 // 1 or AccelStepper::DRIVER means a stepper driver (with Step and Direction pins)
 AccelStepper stepperFilament(AccelStepper::DRIVER, stepPinFilament, directionPinFilament);
 
-
-
 // Flag to indicate if button is pressed
 
-void setup()
+void SetupMotor()
 {
-  Serial.begin(9600);
+ Serial.println(filament_Afstand1);
 
- stepperFilament.setEnablePin(enablePin1);
+  stepperFilament.setEnablePin(enablePinFilament);
   stepperFilament.setPinsInverted(false, false, true);
-
-
-
-
   stepperFilament.enableOutputs();
-  
-  stepperFilament.setMaxSpeed(1000);
-  //FIlament motor
-  stepperFilament.setSpeed(0);
-  
-
+  stepperFilament.setMaxSpeed(400);
+  stepperFilament.setAcceleration(50);
 }
 
-void loop()
+void MotorLoop()
 {
-   // Drejer hjulle æ ås
-  stepperFilament.runSpeed();
-
-
+  int analogReadHall = analogRead(analogPin1);
+  filament_Afstand1 = -0.0294*analogReadHall+19.882;
+  // Adjust motor speed based on filament_afstand value
+  if (filament_Afstand1 >= 1.8) {
+    stepperFilament.setMaxSpeed(hspeed);
+    Serial.println("test1");
+    Serial.println(filament_Afstand1);
+    stepperFilament.move(200);
+    stepperFilament.run();
+  } 
+  else if (filament_Afstand1 <= 1.7) {
+    stepperFilament.setMaxSpeed(lspeed);
+    Serial.println("test2");
+    Serial.println(filament_Afstand1);
+    stepperFilament.move(100);
+    stepperFilament.run();
+  } 
+  else {
+    float speed = (filament_Afstand1 - 1.75) * (hspeed - lspeed) / (1.8 - 1.7) + lspeed;
+    stepperFilament.setMaxSpeed(dspeed);
+    stepperFilament.move(200);
+    stepperFilament.run();
   }
- 
-
-  if (filament_Afstand > 1.7) {
-    stepperFilament.setSpeed(hspeed);
-  } else if (filament_Afstand < 1.3) {
-    stepperFilament.setSpeed(lspeed);
-  } else {
-    stepperFilament.setSpeed(dspeed);
-  }
-
-  // Drejer hjulle æ ås
-
+  
+  // Run the motor at the current speed
+}
