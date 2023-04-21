@@ -1,3 +1,4 @@
+/*
 // START 1 STOR MOTOR(BOR MOTOR)
 
 // Som sagt er vores pin til motorne blevet reserveret fra 42 til 53 på arduino megaen (DIGITAL PINS). 
@@ -33,3 +34,4 @@ void forward(int steps){
   digitalWrite(ENAPIN,HIGH);//DISABLE STEPPER
 }
 
+*/
