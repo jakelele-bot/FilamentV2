@@ -2,13 +2,14 @@
 #include <LiquidCrystal_I2C.h> // LiquidCrystal I2C Frank de Brabander
 #include <HX711.h> // HX711 Arduino Library af Bogdan Necula
 #include <max6675.h> //af adafruit bliver brugt i "thermo.h"
-
+#include <<AccelStepper.h>
 //------HEADER FILER------
 
 #include "LCD.h" //header fil til LCD display menuen
 #include "thermo.h" //header fil til temperatur måling
 #include "regPID.h" //header fil til PID regulering.
 #include "setupOpstart.h" //header fil til start af LCD skærm
+#include "Filamenttmotor.h" //header fil til start af LCD skærm
 
 
 
@@ -42,10 +43,7 @@ const long interval = 300;
 unsigned long previousMillis = 0;
 
 
-
-//float filament_Afstand = 20.667*log(analogReadHall)-125.59;
-//float filament_Afstand = (0.0013*(analogReadHall*analogReadHall))-1.0646*analogReadHall+224.06;
-float filament_Afstand = (0.0016*(analogReadHall*analogReadHall))-1.4604*analogReadHall+324.89;
+float filament_Afstand;
 
 
 void setup() {
