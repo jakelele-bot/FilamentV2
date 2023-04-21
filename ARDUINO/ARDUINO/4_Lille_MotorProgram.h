@@ -9,13 +9,13 @@ const int stepPin1 = 37;
 const int directionPin1 = 33;
 const int enablePin1 = 35;
 
-const int stepPin2 = 53;
-const int directionPin2 = 51;
-const int enablePin2 = 49;
+const int stepPin3 = 53;
+const int directionPin3 = 51;
+const int enablePin3 = 49;
 
-const int stepPin3 = 48;
-const int directionPin3 = 50;
-const int enablePin3 = 52;
+const int stepPin2 = 48;
+const int directionPin2 = 50;
+const int enablePin2 = 52;
 
 const int stepPin4 = 46;
 const int directionPin4 = 47;
