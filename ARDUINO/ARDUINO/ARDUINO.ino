@@ -4,6 +4,7 @@
 #include <HX711.h> // HX711 Arduino Library af Bogdan Necula
 #include <max6675.h> //af adafruit bliver brugt i "thermo.h"
 #include <AccelStepper.h>
+#include <Stepper.h>
 #include <ezButton.h>
 
 
@@ -11,7 +12,7 @@
 
 #include "LCD.h" //header fil til LCD display menuen
 #include "thermo.h" //header fil til temperatur måling
-#include "regPID.h" //header fil til PID regulering.
+#include "PIDcontroller.h" //header fil til PID regulering.
 #include "setupOpstart.h" //header fil til start af LCD skærm
 #include "Filamenttmotor.h" //header fil til start af LCD skærm
 
@@ -21,9 +22,9 @@ ezButton buttonPin(31);
 ezButton STARTKNAP(42);
 
 //Variabler til menu værdier
-int menu1_Value = 166; //value for afstand til væg
+int menu1_Value = 117; //value for afstand til væg
 int menu2_Value = 3; //value for væg tykkelsen
-int menu3_Value = 60; //value for højde
+int menu3_Value = 55; //value for højde
 int menu4_Value = 0; //value for start af program
 
 bool PLA=false;
@@ -51,11 +52,11 @@ const int stepPin1 = 37;
 const int dirPin1 = 33;
 const int enablePin1 = 35;
 const int motorSpeed2 = 60;
-
+/*
 const int stepPin3 = 48;
 const int dirPin3 = 50;
 const int enablePin3 = 52;
-
+*/
 bool iBund = false;
 bool home = false;
 bool hasMoved = false;
@@ -66,7 +67,8 @@ int stepsTaken;
 
 AccelStepper stepper1(AccelStepper::DRIVER, stepPin, dirPin);
 AccelStepper stepper2(AccelStepper::DRIVER, stepPin1, dirPin1);
-AccelStepper stepper3(AccelStepper::DRIVER, stepPin3, dirPin3);
+//AccelStepper stepper3(AccelStepper::DRIVER, stepPin3, dirPin3);
+//Stepper myStepper(200,stepPin3,dirPin3);
 
 
 int motor_RPM = 500;
@@ -78,20 +80,24 @@ int analogReadHall;
 
 
 
-int PLA_TOP = 100;
+int PLA_TOP = 150;
 int PLA_BUND = 175;
 double temperature2;
 double temperature1;
-regPID pid1(115, 18, 0.5, 13);
-regPID pid2(105.5, 70, 6, 10);
-
+//regPID pid1(115, 18, 0.5, 13);
+//regPID pid2(105.5, 70, 6, 10);
 thermo thermo1(41, 43, 45);
 thermo thermo2(23, 25, 27);
 //indsæt pins på arduinoen der tilhører thermo(int SO, int CS, int SCK) SO,CS og SCK på max6675/breakout board
 
+
+
 const long interval = 300;
 unsigned long previousMillis = 0;
 
+PIDController newPid1(650,0.8,20,13);
+PIDController newPid2(495,1.4,15,10);
+//PIDController(float _kp, float _ki, float _kd, int _mosfet_pin)
 
 float filament_Afstand;
 
@@ -138,16 +144,10 @@ void loop() {
           //Serial.println(temperature2);
       }
   if(PLA==true){
-    pid1.update(temperature1,PLA_TOP);
-    pid2.update(temperature2,PLA_BUND);
-  }
-  if(PLA==true){
-    if(0.9 * PLA_TOP <= temperature1 && temperature1 <= 1.1 * PLA_TOP &&
-    0.9 * PLA_BUND <= temperature2 && temperature2 <= 1.1 * PLA_BUND){
-      stepper3.move(200);
-      stepper3.run();
-    }
-
+    stepper3.move(200);
+    stepper3.run();
+    newPid1.update(PLA_TOP,temperature1);
+    newPid2.update(PLA_BUND,temperature2);
   }
   
 
@@ -203,7 +203,7 @@ void ProgramStart(){
     lcd.clear();
     stateRefresh = 0;
   }
-  /*
+  
   lcd.setCursor(0,0); //1st line, 2nd block
   lcd.print("   "); //erase the content by printing space over it
   lcd.setCursor(0,0);
@@ -223,7 +223,7 @@ void ProgramStart(){
   lcd.print("   "); //erase the content by printing space over it
   lcd.setCursor(0,3);
   lcd.print("VEGT"); //text
-*/
+
   ValueUpdater();
 }
 
@@ -279,20 +279,29 @@ void home2(){
     home=true;
   }
 }
-void opNed(){
+void opNed(){}
+/*
   if(STARTKNAP.getState() == 1 && home == true){
     for(int i = 0; i < antalRotation; i++){
       stepper2.move(Gearing);
-      stepper2.runToPosition();
-      stepper1.move(-antalOpNedSteps);
-      stepper1.runToPosition();
+      stepper2.run();
+      stepper3.move(200);
+      stepper3.run();
+      for(int j = 0; j < antalOpNedSteps; j++){
+        stepper1.move(-100);
+        stepper1.runSpeed();
+      }
     }
     for(int i = 0; i < antalRotation; i++){
       stepper2.move(Gearing);
       stepper2.runToPosition();
-      stepper1.move(antalOpNedSteps);
-      stepper1.runToPosition();
+      for(int j = 0; j < antalOpNedSteps; j++){
+        stepper1.move(100);
+        stepper1.runSpeed();
+      }
     }
   }
+  
 }
+*/
 
